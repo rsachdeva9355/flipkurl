@@ -6,6 +6,8 @@
  * @version : v0.1
  * @license : GPL
  * @url     : http://code.google.com/p/flipkurl
+ *
+ * @note    : Most of the code is documented and self explanatory.
  */
 
 /**
@@ -475,7 +477,7 @@ class Flipkurl {
 	 * @param string $bid - unique bookid
 	 */
 	function addBook( $bid ) {
-		$res = $x->post("http://www.flipkart.com/viewcart.php", "eid=$bid");
+		$res = $this->h_curl->post("http://www.flipkart.com/viewcart.php", "eid=$bid");
 	}
 	/**
 	 * Remove a particular book from shopping cart
@@ -483,7 +485,7 @@ class Flipkurl {
 	 * @param string $bid
 	 */
 	function removeBook( $bid ) {
-		$res = $x->post("http://www.flipkart.com/kenny.php", "action=DELETEFROMCART&edition_id=$bid" );
+		$res = $this->h_curl->post("http://www.flipkart.com/kenny.php", "action=DELETEFROMCART&edition_id=$bid" );
 	}
 	/**
 	 * Update the quantity of a particular book in the cart
@@ -492,7 +494,7 @@ class Flipkurl {
 	 * @param int $qty
 	 */
 	function updateQuantity( $bid, $qty ) {
-		$res = $x->post("http://www.flipkart.com/kenny.php", "action=CHANGE_CART_QTY&edition_id=$bid&quantity=$qty" );		
+		$res = $this->h_curl->post("http://www.flipkart.com/kenny.php", "action=CHANGE_CART_QTY&edition_id=$bid&quantity=$qty" );		
 	}
 	/**
 	 * Add a particular book to wishlist
@@ -500,7 +502,7 @@ class Flipkurl {
 	 * @param string $bid
 	 */
 	function addToWishList( $bid ) {
-		$res = $x->post("http://www.flipkart.com/kenny.php", "action=ADDTOWISHLIST&edition_id=$bid" ); 
+		$res = $this->h_curl->post("http://www.flipkart.com/kenny.php", "action=ADDTOWISHLIST&edition_id=$bid" ); 
 	}
 	/**
 	 * You can move a book from your current shopping cart to wishlist.
@@ -509,7 +511,7 @@ class Flipkurl {
 	 * @param string $bid
 	 */
 	function moveToWishList( $bid ) {
-		$res = $x->post("http://www.flipkart.com/kenny.php", "action=MOVE_TOWISHLIST_FROMCART&edition_id=$bid" );
+		$res = $this->h_curl->post("http://www.flipkart.com/kenny.php", "action=MOVE_TOWISHLIST_FROMCART&edition_id=$bid" );
 	}
 	/**
 	 * Remove the book from wishlist
@@ -517,7 +519,7 @@ class Flipkurl {
 	 * @param int $bid
 	 */
 	function removeFromWishList( $bid ) {
-		$res = $x->post("http://www.flipkart.com/kenny.php", "action=DELETEFROMWISHLIST&edition_id=$bid" );
+		$res = $this->h_curl->post("http://www.flipkart.com/kenny.php", "action=DELETEFROMWISHLIST&edition_id=$bid" );
 	}
 }
 ?>
