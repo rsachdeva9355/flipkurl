@@ -364,6 +364,7 @@ class Flipkurl {
 	var $isLogged = false;
 	var $email;
 	var $pass;
+	var $cookies_dir = "./";
 	function __construct() {
 		$this->init();
 	}
@@ -399,7 +400,7 @@ class Flipkurl {
 	 */
 	function getCartContents() {
 		$con = $this->h_curl->get( "http://www.flipkart.com/viewcart.php");
-		var_dump( $con );
+		//var_dump( $con );
 		$contents = FlipMisc::getCartContents( $con );
 		return $contents;
 	}
@@ -410,6 +411,7 @@ class Flipkurl {
 	 */
 	function init() {
 		$this->h_curl = new cURL(1);
+		$this->cookies_dir = "./";
 		$this->h_curl->referer = "http://www.flipkart.com";
 	}
 	/**
@@ -426,11 +428,11 @@ class Flipkurl {
 	function login( $email, $pass, $fresh=false ) {
 		$this->email = $email;
 		$this->pass = $pass;
-		$cookiefile = "cookiedump/".md5($email).".txt";
+		$cookiefile = rtrim($this->cookies_dir,'/'). "/".md5($email).".txt";
 		$this->cookiefile = $cookiefile;
 		if( !$fresh && file_exists( $cookiefile ) && strlen($x=file_get_contents($cookiefile))>10 ) {
 			$this->h_curl->cookie( $cookiefile );
-			var_dump( $this->h_curl->cookie_file );
+			//var_dump( $this->h_curl->cookie_file );
 			$this->isLogged = true;
 			return true;
 		} else {
